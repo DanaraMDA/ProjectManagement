@@ -16,37 +16,37 @@ public class StudentJdbc {
     public StudentJdbc(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     public Student get(int id){
-        return jdbcTemplate.queryForObject(sql: "SELECT * FROM student WHERE id = ?", this::mapStudent, id);
+        return jdbcTemplate.queryForObject( "SELECT * FROM student WHERE id = ?", this::mapStudent, id);
     }
 
     private Student mapStudent(ResultSet rs, int i) throws SQLException{
         Student student= new Student(
-                rs.getInt( columnLabel: "id"),
-        rs.getString(columnLabel: "surname"),
-        rs.getString(columnLabel: "name"),
-        rs.getString(columnLabel: "second_name"),
-        rs.getInt(columnLabel: "study_group_id")
+        rs.getInt("id"),
+        rs.getString( "surname"),
+        rs.getString( "name"),
+        rs.getString("second_name"),
+        rs.getInt("study_group_id")
         );
         return student;
     }
 
     public Student search_by_group(int study_group_id){
-        return jdbcTemplate.queryForObject(sql: "SELECT * FROM student WHERE study_group_id= ?", Student.class, study_group_id);
+        return jdbcTemplate.queryForObject( "SELECT * FROM student WHERE study_group_id= ?", Student.class, study_group_id);
     }
 
     public Student show_all(){
-        return JdbcTemplate.queryForObject(sql: "SELECT * FROM student");
+        return jdbcTemplate.queryForObject("SELECT * FROM student", Student.class);
     }
 
     public Student create(int id, String surname, String name, String second_name, int study_group_id){
-        return JdbcTemplate.queryForObject(sql: "INSERT INTO student VALUES(?,?,?,?,?)", Student.class, id, Student.class, surname, Student.class, name, Student.class, second_name, Student.class, study_group_id);
+        return jdbcTemplate.queryForObject("INSERT INTO student VALUES(?,?,?,?,?)", Student.class, id, surname, name, second_name, study_group_id);
     }
 
     public Student delete(int id){
-        return jdbcTemplate.queryForObject(sql: "DELETE FROM student WHERE id= ?", Student.class, id);
+        return jdbcTemplate.queryForObject( "DELETE FROM student WHERE id= ?", Student.class, id);
     }
     public Student modify( String name, int id){
-        return jdbcTemplate.queryForObject(sql: "UPDATE student SET name=? WHERE id= ?", Student.class, name, Student.class, id);
+        return jdbcTemplate.queryForObject( "UPDATE student SET name=? WHERE id= ?", Student.class, name, Student.class, id);
     }
 
 }

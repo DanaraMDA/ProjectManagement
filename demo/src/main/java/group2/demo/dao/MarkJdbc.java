@@ -14,19 +14,19 @@ public class MarkJdbc {
     public MarkJdbc(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     public Mark get(int id){
-        return jdbcTemplate.queryForObject(sql: "SELECT * FROM mark WHERE id = ?", this::mapMark, id);
+        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE id = ?", this::mapMark, id);
     }
 
     private Mark mapMark(ResultSet rs, int i) throws SQLException{
         Mark mark = new Mark(
-                rs.getInt( columnLabel: "id"),
-        rs.getString(columnLabel: "name"),
-        rs.getInt(columnLabel: "value")
+        rs.getInt( "id"),
+        rs.getString( "name"),
+        rs.getInt("value")
         );
         return mark;
     }
 
     public Mark search(String mark){
-        return jdbcTemplate.queryForObject(sql: "SELECT * FROM mark WHERE name = ?", Mark.class, mark);
+        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE name = ?", Mark.class, mark);
     }
 }
