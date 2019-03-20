@@ -1,9 +1,7 @@
 package group2.demo.dao;
-
 import group2.demo.model.Mark;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,7 +21,7 @@ public class MarkJdbc {
         Mark mark = new Mark(
                 rs.getInt( columnLabel: "id"),
         rs.getString(columnLabel: "name"),
-        rs.getString(columnLabel: "value")
+        rs.getInt(columnLabel: "value")
         );
         return mark;
     }
