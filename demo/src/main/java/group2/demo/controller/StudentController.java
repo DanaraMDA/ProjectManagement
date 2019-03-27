@@ -2,13 +2,15 @@ package group2.demo.controller;
 
 import group2.demo.dao.StudentJdbc;
 import group2.demo.model.Student;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
+@CrossOrigin("3000")
 public class StudentController {
 
     private final StudentJdbc studentJdbc;
@@ -23,12 +25,10 @@ public class StudentController {
         return student;
     }
 
-
-
     @GetMapping("/students")
-    public List<Student> getStudents() {
+    public ResponseEntity<List<Student>> getStudents() {
       //  Student student=studentJdbc.show_all();
-        return studentJdbc.show_all();
+        return ResponseEntity.ok().body(studentJdbc.show_all());
     }
     @GetMapping("/student/group/{group_id}")
     public List<Student> search_by_group(@PathVariable int group_id) {
