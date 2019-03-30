@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class StudentJdbc {
@@ -16,7 +17,7 @@ public class StudentJdbc {
     public StudentJdbc(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     public Student get(int id){
-        return jdbcTemplate.queryForObject( "SELECT * FROM student WHERE id = ?", this::mapStudent, id);
+        return jdbcTemplate.queryForObject( "SELECT * FROM student_local WHERE id = ?", this::mapStudent, id);
     }
 
     private Student mapStudent(ResultSet rs, int i) throws SQLException{
@@ -30,23 +31,37 @@ public class StudentJdbc {
         return student;
     }
 
-    public Student search_by_group(int study_group_id){
-        return jdbcTemplate.queryForObject( "SELECT * FROM student WHERE study_group_id= ?", Student.class, study_group_id);
+    public List<Student> search_by_group(int study_group_id){
+        return jdbcTemplate.query( "SELECT * FROM student WHERE study_group_id= ?", this::mapStudent, study_group_id);
     }
 
-    public Student show_all(){
-        return jdbcTemplate.queryForObject("SELECT * FROM student", Student.class);
+    public List<Student> show_all(){
+        return jdbcTemplate.query("SELECT * FROM student",this::mapStudent);// Student.class);
     }
 
-    public Student create(int id, String surname, String name, String second_name, int study_group_id){
-        return jdbcTemplate.queryForObject("INSERT INTO student VALUES(?,?,?,?,?)", Student.class, id, surname, name, second_name, study_group_id);
+    public int create(int id, String surname, String name, String second_name, int study_group_id){
+        return jdbcTemplate.update("INSERT INTO student VALUES(?,?,?,?,?)", id, surname, name, second_name, study_group_id);
     }
 
-    public Student delete(int id){
-        return jdbcTemplate.queryForObject( "DELETE FROM student WHERE id= ?", Student.class, id);
+    public int delete(int id){
+        return jdbcTemplate.update( "DELETE FROM student WHERE ID= ?",  id);
     }
-    public Student modify( String name, int id){
-        return jdbcTemplate.queryForObject( "UPDATE student SET name=? WHERE id= ?", Student.class, name, Student.class, id);
+    public int modify_name( String name, int id){
+        return jdbcTemplate.update( "UPDATE student SET NAME=? WHERE id= ?", name, id);
+    }
+    public int modify_surname( String surname, int id){
+        return jdbcTemplate.update( "UPDATE student SET SURNAME=? WHERE id= ?",  surname,  id);
     }
 
+    public int modify_second_name(String second_name, int id){
+        return jdbcTemplate.update( "UPDATE student SET SECOND_NAME =? WHERE id= ?",  second_name,id);
+    }
+    public int modify_group(int id, int studyGroupId) {
+        return jdbcTemplate.update("UPDATE STUDENT SET STUDY_GROUP_ID=? WHERE ID=?", studyGroupId, id);
+    }
+
+
+    public List<Student> getAllLocal(){
+        return jdbcTemplate.query("SELECT * FROM student_local",this::mapStudent);
+    }
 }
