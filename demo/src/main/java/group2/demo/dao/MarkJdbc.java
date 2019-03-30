@@ -27,6 +27,6 @@ public class MarkJdbc {
     }
 
     public Mark search(String mark){
-        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE name = ?", Mark.class, mark);
+        return jdbcTemplate.queryForObject("SELECT * FROM mark WHERE name = ?", this::mapMark, mark);
     }
 }
