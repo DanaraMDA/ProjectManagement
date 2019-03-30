@@ -30,17 +30,12 @@ public class StudentController {
       //  Student student=studentJdbc.show_all();
         return ResponseEntity.ok().body(studentJdbc.show_all());
     }
-    @GetMapping("/student/group/{group_id}")
+
+
+    @GetMapping("/students/group/{group_id}")
     public List<Student> search_by_group(@PathVariable int group_id) {
         //  Student student=studentJdbc.show_all();
         return studentJdbc.search_by_group(group_id);
-    }
-
-
-
-    @GetMapping("/students/group={group}")
-    public List<Student> getStudentsByGroup(@PathVariable int group) {
-        return studentJdbc.search_by_group(group);
     }
 
     @GetMapping("/student/add/{id}&{surname}&{name}&{second_name}&{study_group}")
@@ -66,7 +61,7 @@ public class StudentController {
 
     @GetMapping("/student/set_secondname/{id}&{secondName}")
     public int updateSecondName(@PathVariable int id, @PathVariable String secondName) {
-        return studentJdbc.modify_secondname( secondName,id);
+        return studentJdbc.modify_second_name( secondName,id);
     }
 
     @GetMapping("/student/set_studygroup/{id}&{studyGroupId}")

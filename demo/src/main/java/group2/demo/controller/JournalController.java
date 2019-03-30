@@ -19,5 +19,54 @@ public class JournalController {
         Journal journal = journalJdbc.get(id);
         return journal;
     }
+    @GetMapping("/journals")
+    public List<Journal> show_all() {
+        return journalJdbc.get_All();
+    }
 
+    @GetMapping("/journal/get_student/{student_id}")
+    public List<Journal> show_student(@PathVariable int student_id) {
+        return journalJdbc.search_by_student(student_id);
+    }
+
+    @GetMapping("/journal/get_study_plan/{study_plan_id}")
+    public List<Journal> show_study_plan(@PathVariable int study_plan_id) {
+
+        return journalJdbc.search_by_group(group);
+    }
+
+    @GetMapping("/journal/add/{id}&{student_id}&{study_plan_id}&{in_time}&{count}&{mark_id}")
+    public int add_journal(@PathVariable int id, @PathVariable int student_id, @PathVariable int study_plan_id, @PathVariable boolean in_time, @PathVariable int count, @PathVariable int mark_id) {
+        return journalJdbc.add(id, student_id, study_plan_id, in_time, count, mark_id);
+    }
+
+    @GetMapping("journal/delete/{id}")
+    public int delete_journal(@PathVariable int id) {
+        return journalJdbc.delete(id);
+    }
+
+    @GetMapping("journal/set_student_id/{id}&{student_id}")
+    public int update_student_id(@PathVariable int id, @PathVariable int student_id) {
+        return journalJdbc.modify_by_student_id(id, studentId);
+    }
+
+    @GetMapping("journal/set_study_plan_id/{id}&{study_plan_id}")
+    public int update_study_slan_id(@PathVariable int id, @PathVariable int study_plan_id) {
+        return journalJdbc.modify_by_study_plan_id(id, study_plan_id);
+    }
+
+    @GetMapping("journal/set_in_time/{id}&{in_time}")
+    public int update_in_time(@PathVariable int id, @PathVariable boolean in_time) {
+        return journalJdbc.modify_in_time(id, in_time);
+    }
+
+    @GetMapping("journal/set_count/{id}&{count}")
+    public int update_count(@PathVariable int id, @PathVariable int count) {
+        return journalJdbc.modify_count(id, count);
+    }
+
+    @GetMapping("journal/set_mark_id/{id}&{markId}")
+    public int update_mark_id(@PathVariable int id, @PathVariable int mark_id) {
+        return journalJdbc.modify_mark_id(id, mark_id);
+    }
 }

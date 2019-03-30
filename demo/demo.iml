@@ -86,5 +86,8 @@
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.1.5.RELEASE" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.6.2" level="project" />
+    <orderEntry type="library" name="Maven: net.progruzovik.bus:bus-datasource-spring-jdbc:1.0-DEAN" level="project" />
+    <orderEntry type="library" name="Maven: net.progruzovik.bus:bus-core:1.0-DEAN" level="project" />
+    <orderEntry type="library" name="Maven: net.progruzovik.bus:bus-messaging-spring-rest:1.0-DEAN" level="project" />
   </component>
 </module>

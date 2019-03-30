@@ -27,19 +27,19 @@ public class GroupJdbc {
         return group;
     }
 
-    public Group show_all(){
-        return jdbcTemplate.queryForObject( "SELECT * FROM study_group",Group.class);
+    public List<Group> show_all(){
+        return jdbcTemplate.query( "SELECT * FROM study_group",this::mapStudy_group);
     }
 
     public Group create(int id, String name){
-        return jdbcTemplate.queryForObject("INSERT INTO study_group VALUES(?,?)", Group.class, id, name);
+        return jdbcTemplate.update("INSERT INTO study_group VALUES(?,?)", id, name);
     }
 
     public Group delete(int id){
-        return jdbcTemplate.queryForObject( "DELETE FROM study_group WHERE id= ?", Group.class, id);
+        return jdbcTemplate.queryForObject( "DELETE FROM study_group WHERE id= ?",  id);
     }
-    public Group modify( String name, int id){
-        return jdbcTemplate.queryForObject("UPDATE study_group SET name=? WHERE id= ?", Group.class, name,id);
+    public Group modify( int id, String name ){
+        return jdbcTemplate.queryForObject("UPDATE study_group SET name=? WHERE id= ?",name,id);
     }
 
 }

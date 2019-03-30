@@ -19,5 +19,20 @@ public class GroupController {
        Group group = groupJdbc.get(id);
         return group;
     }
+
+    @GetMapping("/groups")
+    public List<Group> get_all(){
+        return groupJdbc.show_all();
+    }
+
+
+    @GetMapping("/group/add/{id}&{name}")
+    public Group add_group(@PathVariable int id, @PathVariable String name){
+        return groupJdbc.create(id,name);
+    }
+    @GetMapping("/group/delete/{id}")
+    public Group delete_group(@PathVariable int id){
+        return groupJdbc.delete(id);
+    }
 }
 

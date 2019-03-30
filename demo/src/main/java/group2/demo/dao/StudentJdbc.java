@@ -17,7 +17,7 @@ public class StudentJdbc {
     public StudentJdbc(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
 
     public Student get(int id){
-        return jdbcTemplate.queryForObject( "SELECT * FROM student WHERE id = ?", this::mapStudent, id);
+        return jdbcTemplate.queryForObject( "SELECT * FROM student_local WHERE id = ?", this::mapStudent, id);
     }
 
     private Student mapStudent(ResultSet rs, int i) throws SQLException{
@@ -53,10 +53,15 @@ public class StudentJdbc {
         return jdbcTemplate.update( "UPDATE student SET SURNAME=? WHERE id= ?",  surname,  id);
     }
 
-    public int modify_secondname( String second_name, int id){
+    public int modify_second_name(String second_name, int id){
         return jdbcTemplate.update( "UPDATE student SET SECOND_NAME =? WHERE id= ?",  second_name,id);
     }
     public int modify_group(int id, int studyGroupId) {
         return jdbcTemplate.update("UPDATE STUDENT SET STUDY_GROUP_ID=? WHERE ID=?", studyGroupId, id);
+    }
+
+
+    public List<Student> getAllLocal(){
+        return jdbcTemplate.query("SELECT * FROM student_local",this::mapStudent);
     }
 }

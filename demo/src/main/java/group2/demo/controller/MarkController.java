@@ -20,6 +20,9 @@ public class MarkController {
         Mark mark = markJdbc.get(id);
         return mark;
     }
-
+    @GetMapping("/mark/search_by_name/{name}")
+    public Mark getMark(@PathVariable String name){
+        return markJdbc.search(name);
+    }
 
 }
