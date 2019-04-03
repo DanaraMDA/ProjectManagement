@@ -4,7 +4,8 @@ import group2.demo.dao.GroupJdbc;
 import group2.demo.model.Group;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 public class GroupController {
 
@@ -27,11 +28,11 @@ public class GroupController {
 
 
     @GetMapping("/group/add/{id}&{name}")
-    public Group add_group(@PathVariable int id, @PathVariable String name){
+    public int add_group(@PathVariable int id, @PathVariable String name){
         return groupJdbc.create(id,name);
     }
     @GetMapping("/group/delete/{id}")
-    public Group delete_group(@PathVariable int id){
+    public int delete_group(@PathVariable int id){
         return groupJdbc.delete(id);
     }
 }

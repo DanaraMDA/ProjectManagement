@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class GroupJdbc {
@@ -31,15 +32,16 @@ public class GroupJdbc {
         return jdbcTemplate.query( "SELECT * FROM study_group",this::mapStudy_group);
     }
 
-    public Group create(int id, String name){
+    public int create(int id, String name){
         return jdbcTemplate.update("INSERT INTO study_group VALUES(?,?)", id, name);
     }
 
-    public Group delete(int id){
-        return jdbcTemplate.queryForObject( "DELETE FROM study_group WHERE id= ?",  id);
+    public int delete(int id){
+
+        return jdbcTemplate.update("DELETE FROM study_group WHERE id= ?",  id);
     }
-    public Group modify( int id, String name ){
-        return jdbcTemplate.queryForObject("UPDATE study_group SET name=? WHERE id= ?",name,id);
+    public int modify(int id, String name ){
+        return jdbcTemplate.update("UPDATE study_group SET name=? WHERE id= ?",name,id);
     }
 
 }
